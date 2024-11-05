@@ -17,7 +17,7 @@ $(document).ready(() => {
   // Select the "Previous Photo" button and add a click event to call showPrevPhoto
 
   // Call fetchJSON() to load the initial set of images
-  fetchJSON()
+  fetchJSON() 
 })
 
 // Function to fetch JSON data and store it in mImages
