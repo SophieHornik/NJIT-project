@@ -11,7 +11,10 @@ $(document).ready(() => {
   // Select the moreIndicator button and add a click event to:
   // - toggle the rotation classes (rot90 and rot270)
   // - slideToggle the visibility of the .details section
-
+$('.moreIndicator').on('click', function () {
+  $('.moreIndicator').toggleClass('rot270 rot90')
+  $('.details').slideToggle()
+})
   // Select the "Next Photo" button and add a click event to call showNextPhoto
 
   // Select the "Previous Photo" button and add a click event to call showPrevPhoto
@@ -28,9 +31,14 @@ function fetchJSON () {
     url: mUrl,
     success: function (data) {
       mImages = data.images
-      console.log(mImages[mCurrentIndex])
       //change photo
+      $("#photo").attr("src","img/paris.jpg");
       // meta 1 
+      $(".location").text("Location: France");
+       // meta 2
+       $(".description").text(" Description: Effiel Tower");
+      // meta 3
+      $(".snow").text("Snow in native language:Neige");
     }
   });
   // On success, parse the JSON and push each image object into mImages array
