@@ -16,9 +16,9 @@ $('.moreIndicator').on('click', function () {
   $('.details').slideToggle()
 })
   // Select the "Next Photo" button and add a click event to call showNextPhoto
-
+$('#nextPhoto').on('click',showNextPhoto)
   // Select the "Previous Photo" button and add a click event to call showPrevPhoto
-
+  $('#prevPhoto').on('click',showPrevPhoto)
   // Call fetchJSON() to load the initial set of images
   fetchJSON() 
 })
@@ -32,13 +32,7 @@ function fetchJSON () {
     success: function (data) {
       mImages = data.images
       //change photo
-      $("#photo").attr("src","img/paris.jpg");
-      // meta 1 
-      $(".location").text("Location: France");
-       // meta 2
-       $(".description").text(" Description: Effiel Tower");
-      // meta 3
-      $(".snow").text("Snow in native language:Neige");
+      swapPhoto()
     }
   });
   // On success, parse the JSON and push each image object into mImages array
@@ -49,18 +43,25 @@ function fetchJSON () {
 function swapPhoto () {
   // Access mImages[mCurrentIndex] to update the image source and details
   // Update the #photo element's src attribute with the current image's path
+  $('#photo').attr('src',`${mImages[mCurrentIndex].imgPath}`)
   // Update the .location, .description, and .date elements with the current image's details
+  $('.location').text(`Location: ${mImages[mCurrentIndex].imgLocation}`)
+  $('.description').text(`Description: ${mImages[mCurrentIndex].description}`)
+  $('.snow').text(`Snow in native language: ${mImages[mCurrentIndex].Snow}`)
 }
 
 // Advances to the next photo, loops to the first photo if the end of array is reached
 function showNextPhoto () {
   // Increment mCurrentIndex and call swapPhoto()
+  mCurrentIndex++
+  swapPhoto()
   // Ensure it loops back to the beginning if mCurrentIndex exceeds array length
 }
 
 // Goes to the previous photo, loops to the last photo if mCurrentIndex goes negative
 function showPrevPhoto () {
   // Decrement mCurrentIndex and call swapPhoto()
+  mCurrentIndex--
   // Ensure it loops to the end if mCurrentIndex is less than 0
 }
 
